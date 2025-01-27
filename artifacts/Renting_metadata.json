@@ -71,6 +71,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "RentalFinished",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "assetName",
 				"outputs": [
 					{
@@ -281,11 +294,11 @@
 	},
 	"sources": {
 		"Renting.sol": {
-			"keccak256": "0xa9047b5930145c8ee3d8903348c1f21b0693c21b8caf97c9c8af1c570d9db5be",
+			"keccak256": "0x9f582a626607ce28fab6a34266ec0fef22aa470b427610294dc42bb724d4b4f1",
 			"license": "LGPL-3.0-only",
 			"urls": [
-				"bzz-raw://d78fb844819f0a5f85fab892beaba30ced37033f3c5d9ba180fdf415dc0b46b3",
-				"dweb:/ipfs/QmagdZP4hBPaSSLUpRPQro4zpYjv47gJw2gMfbpHKwTXAS"
+				"bzz-raw://ca8a0174924a20fabfe1895dc967925d728eabad4126ee13715301af4bcdf1ee",
+				"dweb:/ipfs/QmTJTNPKXMhmX4c2vSBpscgUjjzk8BfkNY35phvZRmh6kj"
 			]
 		}
 	},

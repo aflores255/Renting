@@ -19,15 +19,17 @@ contract Renting {
     uint256 public depositPercentage = 20;  // Safety deposit percentage
     uint256 public depositAmount;  // Safety Deposit
     uint256 public totalAmount;    // previous total amount to pay
+    bool isFinished;
 
     //First execution to initialize variables
     constructor(address tenant_, uint256 rentAmount_, uint256 rentalPeriod_, string memory assetName_) {
         owner = msg.sender; // Contract deployer
         tenant = tenant_;
-        rentAmount = rentAmount_;
+        rentAmount = rentAmount_ * 1 wei;
         rentalPeriod = rentalPeriod_;
         assetName = assetName_;  // Asset to rent name
         isActive = false;
+        isFinished = false;
 
         // Calculate deposit + rent amount
         depositAmount = (rentAmount * depositPercentage) / 100;
@@ -71,13 +73,18 @@ contract Renting {
         _;
         
     }
+
+    modifier isRentalFinished(){
+        if (isFinished) revert("Rental is finished");
+        _;
+    }
     // Events
     event RentPaid(address indexed tenant, uint256 amount);
     event RentalCompleted(address indexed tenant, uint256 amountRefunded);
 
 
     //External Functions
-    function payRent() external payable onlyTenant isRentalInactive checkQuantity{
+    function payRent() external payable onlyTenant isRentalInactive checkQuantity isRentalFinished{
 
         isActive = true;
         startTime = block.timestamp;
@@ -89,6 +96,7 @@ contract Renting {
         
 
         isActive = false;
+        isFinished = true;
 
         payable(tenant).transfer(depositAmount);
 
@@ -105,5 +113,9 @@ contract Renting {
 
     function getDepositAmount() external view returns (uint256) {
         return depositAmount;
+    }
+
+    function RentalFinished() external view returns (bool) {
+        return isFinished;
     }
 }
